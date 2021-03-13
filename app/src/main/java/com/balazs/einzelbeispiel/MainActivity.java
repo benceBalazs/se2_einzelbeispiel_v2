@@ -18,6 +18,7 @@ import java.net.Socket;
 public class MainActivity extends AppCompatActivity {
     EditText mEdit;
     TextView tcpResult;
+    TextView featureResult;
 
     @SuppressLint("StaticFieldLeak")
     public class NetworkCallTCP extends AsyncTask<String, int[], String> {
@@ -50,6 +51,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
+    public class FeatureCall extends AsyncTask<String, int[], String> {
+        @Override
+        protected String doInBackground(String... params) {
+            StringBuilder outputString = new StringBuilder();
+            if (params.length != 0) {
+                for (int i = 0; i < params[0].length(); i++) {
+                    if ((i+1) % 2 == 0 && params[0].charAt(i) != '0') {
+                        int offSet = 'a' + Character.getNumericValue(params[0].charAt(i)) - 1;
+                        outputString.append((char) offSet);
+                    } else {
+                        outputString.append(params[0].charAt(i));
+                    }
+                }
+            }
+            return outputString.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String outputString) {
+            super.onPostExecute(outputString);
+            featureResult = (TextView) findViewById(R.id.aufgabe2Text);
+            if(!outputString.equals("")){
+                featureResult.setText(outputString);
+            }else{
+                outputString = "Leeres Feld!";
+                featureResult.setText(outputString);
+            }
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,5 +92,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void runTCP(View v) {
         new NetworkCallTCP().execute(mEdit.getText().toString());
+    }
+
+    public void runFeature(View v) {
+        new FeatureCall().execute(mEdit.getText().toString());
     }
 }
