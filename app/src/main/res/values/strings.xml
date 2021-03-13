@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">einzelbeispiel</string>
+    <string name="einzelbeispiel">Einzelbeispiel</string>
+    <string name="matrikelnummer">Matrikelnummer</string>
+    <string name="tcp_feature">TCP Feature</string>
+    <string name="send">Send</string>
+    <string name="result">Result</string>
+    <string name="erweiterung_aufgabe_2">Erweiterung Aufgabe 2</string>
+    <string name="calc">Calc</string>
+    <string name="logo_of_app">Logo of app</string>
+</resources>
